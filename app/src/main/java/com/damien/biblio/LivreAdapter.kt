@@ -1,5 +1,6 @@
 package com.damien.biblio
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 class LivreAdapter(private val onClick: (Livre) -> Unit) :
     ListAdapter<Livre, LivreAdapter.LivreViewHolder>(LivreDiffUtil()) {
 
+    fun ttest(){
+        Log.e("dfsdf", "fdsfds")
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LivreViewHolder =
         LivreViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)

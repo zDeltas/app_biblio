@@ -3,7 +3,6 @@ package com.damien.biblio
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -31,7 +30,10 @@ class MainActivity : AppCompatActivity() {
         checkUser()
 
         myAdapter = LivreAdapter {
-                Log.e("salut", this.livre.toString())
+            val intent = Intent(this, LivreDetail::class.java)
+            Log.e("Detail livre", "${it.id} clicked")
+            intent.putExtra("1","${it.id}")
+            startActivity(intent)
         }
 
         mRecyclerView.apply {
@@ -73,7 +75,8 @@ class MainActivity : AppCompatActivity() {
 
                     for(dc: DocumentChange in value?.documentChanges!!){
                         if(dc.type == DocumentChange.Type.ADDED){
-                            livre.add(dc.document.toObject(Livre::class.java))
+                            Log.e("ifhdsiuf", dc.document.id)
+                            livre.add(Livre(dc.document.id, dc.document.get("titre").toString(), dc.document.get("auteur").toString()))
                         }
                     }
 
