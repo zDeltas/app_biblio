@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 
-class LivreAdapter(private val onClick: () -> Unit) :
-    ListAdapter<Livre, LivreAdapter.LivreViewHolder>(PersonDiffUtil()) {
+class LivreAdapter(private val onClick: (Livre) -> Unit) :
+    ListAdapter<Livre, LivreAdapter.LivreViewHolder>(LivreDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LivreViewHolder =
         LivreViewHolder(
@@ -32,7 +32,7 @@ class LivreAdapter(private val onClick: () -> Unit) :
 
         init {
             itemView.setOnClickListener {
-
+                onClick(getItem(adapterPosition))
             }
         }
 
@@ -42,7 +42,7 @@ class LivreAdapter(private val onClick: () -> Unit) :
         }
     }
 
-    class PersonDiffUtil : DiffUtil.ItemCallback<Livre>() {
+    class LivreDiffUtil : DiffUtil.ItemCallback<Livre>() {
         override fun areItemsTheSame(oldItem: Livre, newItem: Livre): Boolean {
             return oldItem.titre == newItem.titre || oldItem.auteur == newItem.auteur
         }

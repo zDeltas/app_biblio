@@ -15,15 +15,13 @@ import com.google.firebase.firestore.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val TAG = "MyActivity"
-
     private val mRecyclerView by lazy { findViewById<RecyclerView>(R.id.recycler_view) }
 
     private lateinit var auth: FirebaseAuth
 
     private var livre = ArrayList<Livre>()
 
-    private lateinit var myAdapter: LivreAdapter;
+    private lateinit var myAdapter: LivreAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,26 +30,20 @@ class MainActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         checkUser()
 
-        val livreAdapter = LivreAdapter {
-            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show()
-        }
-
-    }
-
-    private fun postList(){
-
-        val livreAdapter = LivreAdapter {
-            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show()
+        myAdapter = LivreAdapter {
+                Log.e("salut", this.livre.toString())
         }
 
         mRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
             itemAnimator = DefaultItemAnimator()
-            adapter = livreAdapter
+            adapter = myAdapter
         }
+    }
 
-        livreAdapter.submitList(livre)
+    private fun postList(){
+        myAdapter.submitList(livre)
     }
 
     private fun checkUser() {
