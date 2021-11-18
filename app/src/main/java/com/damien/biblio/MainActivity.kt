@@ -32,7 +32,10 @@ class MainActivity : AppCompatActivity() {
         myAdapter = LivreAdapter {
             val intent = Intent(this, LivreDetail::class.java)
             Log.e("Detail livre", "${it.id} clicked")
-            intent.putExtra("1","${it.id}")
+            intent.putExtra("auteur","${it.auteur}")
+            intent.putExtra("titre","${it.titre}")
+            intent.putExtra("date","${it.date}")
+            intent.putExtra("lu","${it.lu}")
             startActivity(intent)
         }
 
@@ -52,15 +55,15 @@ class MainActivity : AppCompatActivity() {
         val firebaseUser = auth.currentUser
 
         if (firebaseUser != null) {
-            PrintFireStorageDB()
+            loadFireStore()
         } else {
-            PrintFireStorageDB()
+            loadFireStore()
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }
 
-    private fun PrintFireStorageDB() {
+    private fun loadFireStore() {
         val db = FirebaseFirestore.getInstance()
         db.collection("Livres")
             .addSnapshotListener(object : EventListener<QuerySnapshot>{
@@ -76,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                     for(dc: DocumentChange in value?.documentChanges!!){
                         if(dc.type == DocumentChange.Type.ADDED){
                             Log.e("ifhdsiuf", dc.document.id)
-                            livre.add(Livre(dc.document.id, dc.document.get("titre").toString(), dc.document.get("auteur").toString()))
+                            livre.add(Livre(dc.document.id, dc.document.get("titre").toString(), dc.document.get("auteur").toString(), dc.document.get("date").toString(), dc.document.get("lu").toString(),))
                         }
                     }
 
@@ -84,8 +87,6 @@ class MainActivity : AppCompatActivity() {
 
                 }
             })
-
-
     }
 
     private fun signOut() {

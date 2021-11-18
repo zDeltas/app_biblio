@@ -5,17 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context=".LoginActivity">
+    tools:context=".signupActivity">
 
+    <ImageView
+        android:id="@+id/BooksIv"
+        android:layout_width="wrap_content"
+        android:layout_height="237dp"
+        android:scaleType="fitEnd"
+        app:srcCompat="@drawable/imagebooks" />
 
     <TextView
-        android:id="@+id/Connexion"
+        android:id="@+id/TitleLabelTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Connexion"
+        android:text="Inscription"
         style="@style/TextAppearance.MaterialComponents.Headline4"/>
-
 
 
     <!--Email-->
@@ -57,24 +62,12 @@
     <!--Login Button-->
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/SignupBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Inscription"
         android:layout_below="@+id/password"
-        android:layout_marginTop="10dp"
-        android:text="Connexion" />
-
-    <!--Sign up-->
-
-    <Button
-        android:id="@+id/signupBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Crée compte"
-        android:layout_alignParentBottom="true"
-        android:padding="5dp"
-        android:layout_centerHorizontal="true"
-        style="@style/TextAppearance.MaterialComponents.Caption"/>
+        android:layout_marginTop="10dp"/>
 
 
 </RelativeLayout>

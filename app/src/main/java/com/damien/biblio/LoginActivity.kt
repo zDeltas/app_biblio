@@ -15,16 +15,22 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val mail = findViewById<EditText>(R.id.EmailEt);
-        val password = findViewById<EditText>(R.id.PassordEt);
-        val login = findViewById<Button>(R.id.LoginBtn)
+        val mail = findViewById<EditText>(R.id.emailIn);
+        val password = findViewById<EditText>(R.id.passwordIn);
+        val login = findViewById<Button>(R.id.loginBtn)
+        val signUp = findViewById<Button>(R.id.signupBtn)
 
         login.setOnClickListener(){
+
             val txt_mail = mail.text.toString();
             val txt_password = password.text.toString();
 
             login(txt_mail, txt_password);
 
+        }
+
+        signUp.setOnClickListener(){
+            startActivity(Intent(this, signupActivity::class.java))
         }
     }
 

@@ -2,28 +2,28 @@ package com.damien.biblio
 
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.firestore.FirebaseFirestore
 
 
 class LivreDetail : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_livre_detail)
 
-        PrintFireStorageDB()
+        val TVdetail_titre : TextView = findViewById(R.id.TVdetail_titre) as TextView
+        val TVdetail_auteur : TextView = findViewById(R.id.TVdetail_auteur) as TextView
+        val TVdetail_lu : TextView = findViewById(R.id.TVdetail_lu) as TextView
+        val TVdetail_parution : TextView = findViewById(R.id.TVdetail_parution) as TextView
+
+
+        TVdetail_titre.text = intent.getStringExtra("titre")
+        TVdetail_auteur.text = intent.getStringExtra("auteur")
+        TVdetail_lu.text = intent.getStringExtra("lu")
+        TVdetail_parution.text = intent.getStringExtra("date")
     }
 
-    private fun PrintFireStorageDB() {
-        val db = FirebaseFirestore.getInstance()
-        db.collection("Livres").document(intent.getStringExtra("1").toString())
-            .get()
-            .addOnSuccessListener {livreRef ->
-                Log.d("dsqiuhdsq", "DocumentSnapshot written with ID: ${livreRef.id}")
-            }
 
-
-    }
 }
